@@ -1,0 +1,148 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo */
+body {
+  background: linear-gradient(to bottom, #5076e0 0%, #5a7deb 100%);
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+}
+
+/* NAVBAR */
+.navbar {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  height: 70px; /* altura fixa */
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+.nav-logo img {
+  height: 140px;
+  object-fit: contain;
+}
+
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #1a1a1a;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-links li:hover {
+  color: #446de1;
+}
+
+
+.nav-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #f0f0f0;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: 0.3s;
+  gap: 6px;
+}
+
+.nav-search i {
+  color: #666;
+  font-size: 18px;
+}
+
+.nav-search input {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding-left: 5px;
+  font-size: 14px;
+  color: #333;
+  width: 150px;
+}
+
+.nav-search:hover {
+  background: #e0e0e0;
+}
+
+.divider {
+  border: none;
+  height: 1px;
+  background-color: rgb(173, 173, 173);
+  margin: 30px 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(68, 109, 225, 0.3);
+  border-radius: 2px;
+}
+
+
+/* CARD */
+.card {
+  background-color: white;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 14px;
+  color: #446de1;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Título e Meta */
+.card h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.meta {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 30px;
+}
+
+.meta span {
+  margin-right: 20px;
+}
+
+/* Parágrafos */
+.card p {
+  margin-bottom: 20px;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: black;
+  background-color: white;
+  font-size: 14px;
+  margin-top: 40px;
+}

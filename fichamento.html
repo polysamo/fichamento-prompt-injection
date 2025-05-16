@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LABIT</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <img src="labit.jpg" alt="LABIT">
+    </div>
+    <ul class="nav-links">
+      <li><i class="bi bi-house-door"></i> INÍCIO</li>
+      <li><i class="bi bi-people"></i> SOBRE NÓS</li>
+      <li><i class="bi bi-journal-text"></i> ARTIGOS</li>
+      <li><i class="bi bi-search"></i> PROJETOS </li>
+      <li><i class="bi bi-newspaper"></i> NOTÍCIAS</li>
+      <li><i class="bi bi-envelope"></i> CONTATO</li>
+    </ul>
+    <div class="nav-search">
+    <i class="bi bi-search"></i>
+    <input type="text" placeholder="Buscar...">
+  </div>
+  </nav>
+
+  <!-- CARD COM CONTEÚDO -->
+  <div class="card">
+    <section class="breadcrumb">
+      ARTIGOS / SEGURANÇA DA INFORMAÇÃO / PROMPT INJECTION
+    </section>
+
+    <h2>Fichamento do artigo: “Prompt Injection Attack Against LLM-integrated Applications”</h2>
+
+    <div class="meta">
+    <span><i class="bi bi-calendar-event"></i> 16 de maio de 2025</span>
+    <span><i class="bi bi-at"></i>labit.ufpa</span>
+  </div>
+
+  <hr class="divider">
+
+    <p>
+      O artigo <strong>“Prompt Injection attack against LLM-integrated Applications”</strong> foi desenvolvido e escrtito pelos pesquisadores Yi Liu, Gelei Deng, Yuekang Li, Kailong Wang, Zihao Wang, Xiaofeng Wang, Tianwei Zhang, Yepang Liu, Haoyu Wang, Yan Zheng e Yang Liu, além de ter sido publicado na "Cryptography and Security" da Universidade de Cornell em 2024 e disponibilizado como preprint no repositório arXiv em março de 2024 (arXiv:2306.05499v2 [cs.CR]).
+    </p>
+    <p>
+      O estudo apresenta uma breve apresentação sobre como os <strong>Large Language Models (LLMs)</strong> vêm transformando diversas aplicações, mas também introduzem vulnerabilidades de segurança, como o <strong>prompt injection</strong>, que permite usuários maliciosos modificarem as instruções originais desses modelos e injetar uma ação maldosa. O artigo, primeiramente, mostra um estudo piloto em 10 serviços comerciais integrados a LLMs, demostrando que ataques de prompt injection existentes foram pouco eficazes, devido à interpretação diversa dos prompts, restrições impostas pelas aplicações sobre as entradas e saídas e mecanismos de defesa baseados em múltiplas etapas com restrições de tempo.
+    </p>
+    <P>Na imagem abaixo é demostrado uma aplicação integrada com LLM com uso normal (parte superior) e injeção de prompt (parte inferior).</P>
+    <figure style="text-align:center; margin: 20px 0;">
+      <img src="prompt injection.png" alt="prompt injection" style="width:50%; height:auto;">
+      <figcaption style="font-size: 0.9em; color: #555; margin-top: 8px;">
+        Figura 1. Fonte: Artigo "Prompt Injection attack against LLM-integrated Applications", 2024.
+      </figcaption>
+    </figure>
+    <p>
+      Para superar essas limitações existentes, foi desenvolvida a metodologia <strong>HouYi</strong>, uma técnica inovadora de ataque de injeção rápida em caixa-preta que utiliza um LLM integrado ao aplicativo alvo para entender a semântica dele e gerar payloads adaptativos compostos por três componentes. Ela foi testada em 36 serviços reais, alcançando 86,1% de sucesso, destacando vulnerabilidades que permanecem mesmo diante de defesas contra ataques tradicionais, permitindo roubo de prompts originais e exploração do poder computacional das aplicações.
+    </p>
+    <P>
+      Aplicações integradas a LLM funcionam com provedores que criam prompts pré-definidos, adaptando as entradas do usuário para gerar uma saída específica via modelo de linguagem, que é então apresentada ao usuário. No modelo de ameaça descrito no artigo, o adversário, sem acesso interno ao aplicativo, usa endpoints públicos para inserir entradas manipuladas que forçam a aplicação a gerar respostas desviadas de sua função legítima, explorando a arquitetura do sistema para comprometer sua integridade e gerando prejuízos.
+    </P>
+    <p>
+      O principal objetivo do artigo foi, então, analisar os impactos que os ataques de prompt injection causam em aplicações reais que utilizam essas LLMs. Isso é feito por meio da técnica citada anteriormente pelos autores, dividida em três partes: um prompt pré-construído, um contexto indutor de prompt injection e uma carga maliciosa.
+    </p><strong> Visão Geral do HouYi </strong>
+    <p></p>
+    <p>
+      A questão central do estudo é como isolar efetivamente um prompt malicioso do contexto pré-estabelecido para enganar os LLMs, uma tarefa que os ataques tradicionais de injeção não conseguem realizar com sucesso. Para isso, a metodologia HouYi começa com a inferência do contexto do aplicativo por meio da análise das interações entrada-saída, seguida da geração de um prompt de injeção dividido em três partes — um componente que simula a estrutura normal da aplicação, um separador que rompe a ligação semântica com o contexto anterior, e um disruptor que contém o comando malicioso. Por fim, a estratégia é refinada dinamicamente com feedback de um LLM personalizado para maximizar a eficácia do ataque.
+    </p>
+    <p><strong>Metodologia</strong></p>
+    <p>
+    </p>
+    <p>
+      A metodologia utilizada no estudo é composta por um prompt que inicia com a inferência do contexto do aplicativo alvo, usando um LLM para analisar pares de perguntas e respostas extraídas da documentação e exemplos de uso, identificando o objetivo, o formato e o tipo das interações. Em seguida, o prompt é estruturado em três componentes: o Componente Framework, que simula a estrutura e o fluxo da aplicação para garantir respostas consistentes e curtas; o Componente Separador, que cria uma transição clara entre o contexto pré-existente e o comando malicioso usando estratégias como caracteres de escape, troca de idioma e transições semânticas; e o Componente Disruptor, que contém a carga maliciosa ajustada para se alinhar ao formato esperado e limitar o tamanho da saída para evitar filtragens. Por fim, um refinamento iterativo baseado em feedback dinâmico ajusta continuamente esses componentes, aumentando a eficácia da injeção em múltiplas tentativas. A seguir, é apresentado o processo que utiliza o método HouYi na figura 1.
+    </p>
+    <figure style="text-align:center; margin: 20px 0;">
+      <img src="HouYi.png" alt="HouYi" style="width:90%; height:auto;">
+      <figcaption style="font-size: 0.9em; color: #555; margin-top: 8px;">
+        Figura 2. Fonte: Artigo "Prompt Injection attack against LLM-integrated Applications", 2024.
+      </figcaption>
+    </figure>
+    <p><strong>Avaliação e Resultados</strong></p>
+    <p>
+      Para chegar aos resultados, os autores testaram a técnica HouYi em 36 aplicações reais de mercado que utilizam LLMs.
+    </p>
+    <p>
+      A avaliação do HouYi foi ampliada para 26 aplicações adicionais da SUPERTOOLS, selecionadas por sua disponibilidade e integração comprovada com LLMs, todas com documentação clara e medidas de segurança implementadas. Considerou-se, também, uma aplicação vulnerável se o prompt injection fosse bem-sucedido em pelo menos uma das cinco consultas de teste, executadas múltiplas vezes para garantir consistência. Os resultados foram divulgados com transparência e responsabilidade, respeitando a privacidade dos provedores também.
+    </p>
+    <p>
+      Dos 36 aplicativos avaliados, HouYi conseguiu explorar com sucesso 31 deles, indicando alta eficácia em diversos cenários de exploração. Cinco serviços resistiram aos ataques devido a fatores como uso de LLMs específicos de domínio, múltiplos processos internos que refinam a saída ou combinações multimodais, além de arquiteturas que não seguem o modelo tradicional de prompts. A avaliação também identificou que inconsistências no comportamento dos LLMs, qualidade da implementação dos aplicativos e variações no design impactam significativamente a taxa de sucesso dos ataques.
+    </p>
+    <p>
+      Na figura 3, é apresentado os aplicativos integrados ao LLM vulneráveis pelo uso do HouYi. Na coluna Aplicativo Vulnerável, ✓ indica um aplicativo identificado como vulnerável, enquanto ✗ designa aqueles considerados invulneráveis. A coluna Cenário de Exploração mostra o número real de injeções de prompt bem-sucedidas em cinco tentativas totais. O símbolo - é usado para indicar inaplicabilidade. O nome completo das colunas representa Vazamento de Prompt (PL), Geração de Código (CG), Manipulação de Conteúdo (CM), Geração de Spam (SG) e Coleta de Informações (IG), respectivamente.
+    </p>
+    <figure style="text-align:center; margin: 20px 0;">
+      <img src="Tabela de aplicações 1.png" alt="HouYi" style="width:60%; height:auto;">
+      <figcaption style="font-size: 0.9em; color: #555; margin-top: 8px;">
+        Figura 3. Fonte: Polyana Moraes, 2025.
+      </figcaption>
+    </figure>
+    <p>
+      Quanto às estratégias utilizadas, a abordagem semântica <Strong>(HOUYI-SEMANTIC-ONLY)</Strong>apresentou melhor desempenho, enquanto a sintaxe pura <strong>(HOUYI-SYNTAX-ONLY)</strong> foi a menos eficaz, pois muitos aplicativos implementam defesas contra caracteres de escape. A troca de idioma <Strong>(HOUYI-LANGUAGE-ONLY)</Strong> teve um papel único, explorando casos que as outras não conseguiram. As vulnerabilidades detectadas acarretam sérios riscos como vazamento e abuso de prompts, comprometendo propriedade intelectual e gerando prejuízos financeiros aos provedores, exemplificados por casos reais de exploração em aplicativos como White Sonic e PAREA.
+    </p>
+    <p>
+      A pesquisa desenvolvida pode ter um impacto direto no cenário de segurança, ao evidenciar vulnerabilidades reais e propor critérios para entender e combater ataques de prompt injection em LLMs.
+    </p>
+    <p><strong>Conclusão</strong></p>
+    <p>
+      Fazendo uma relação, a pesquisa desenvolvida pelos autores pode ter um impacto direto no cenário de prompt injection, já que esse artigo mostra uma metodologia avançada capaz de identificar e explorar vulnerabilidades em aplicações integradas a LLMs que antes eram consideradas seguras. Além disso, a pesquisa desenvolvida pode ter um impacto direto no cenário de segurança, ao evidenciar vulnerabilidades reais e propor critérios para entender e combater ataques de prompt injection em LLMs, fornecendo, assim, ferramentas e estratégias que auxiliam no fortalecimento das defesas contra esses ataques.
+    </p>
+    <P>
+      Diante disso, o desenvolvimento de técnicas que auxiliam no avanço de soluções e políticas de segurança para mitigar graves problemas serve, também, para ter uma base para a criação de mecanismos de defesa mais robustos e eficazes contra os ataques de prompt enjection. Incentivando, a comunidade acadêmica sobre a pesquisa e desenvolvimentono âmbito.
+    </P>
+  </div>
+  <footer class="footer">
+    <p>© 2025 LABIT. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+
+</html>
